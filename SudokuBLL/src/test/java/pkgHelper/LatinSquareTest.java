@@ -31,6 +31,20 @@ public class LatinSquareTest {
 		assertEquals(bHasDuplicates, true);
 
 	}
+	
+	@Test
+	public void hasDuplicates_test3() throws Exception {
+		int[][] Puzzle= {{1,2,3},{2,3,1},{3,1,2}};
+		LatinSquare LS=new LatinSquare(Puzzle);
+		assertFalse(LS.hasDuplicates());
+	}
+	
+	@Test
+	public void hasDuplicates_test4() throws Exception {
+		int[][] Puzzle= {{1,3,2},{2,3,1},{3,1,2}};
+		LatinSquare LS=new LatinSquare(Puzzle);
+		assertTrue(LS.hasDuplicates());
+	}
 
 	@Test
 	public void doesElementExist_Test1() {
@@ -120,5 +134,9 @@ public class LatinSquareTest {
 		LatinSquare LS = new LatinSquare(MySquare);
 		
 		assertFalse(LS.isLatinSquare());
+	}
+	
+	@Test
+	public void ePuzzleViolationTest() {
 	}
 }
