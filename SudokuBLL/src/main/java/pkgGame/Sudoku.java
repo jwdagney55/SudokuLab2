@@ -36,8 +36,8 @@ public class Sudoku extends LatinSquare {
 		return super.getLatinSquare();
 	}
 	
-	protected int[] getRegion(int iRegionNbr) throws Exception
-	{
+	protected int[] getRegion(int iRegionNbr) throws Exception{
+		int idx = 0;
 		int[] myRegion = new int[this.iSize];
 		int iSize = this.iSize;
 		int iSqrtSize = (int)Math.sqrt(iSize);
@@ -50,9 +50,10 @@ public class Sudoku extends LatinSquare {
 		int[][] sudoku = this.getPuzzle();
 		
 		for(int iRow = (iRegionNbr/iSqrtSize)*iSqrtSize; iRow<((iRegionNbr/iSqrtSize)*iSqrtSize)+iSqrtSize;iRow++) {
-			for (int iCol = (iRegionNbr%iSqrtSize); iCol<((iRegionNbr%iSqrtSize)+iSqrtSize); iCol++) {
-				for (int idx= 0 ; idx<this.iSize; idx++) {
+			for (int iCol = (iRegionNbr%iSqrtSize)*iSqrtSize; iCol<((iRegionNbr%iSqrtSize)*iSqrtSize+iSqrtSize); iCol++) {
+				 {
 					myRegion[idx] = sudoku[iRow][iCol];
+					idx++;
 				}
 			}
 		}
@@ -71,7 +72,7 @@ public class Sudoku extends LatinSquare {
 	
 	@Override
 	protected boolean hasDuplicates() throws Exception {
-		if (hasDuplicates())
+		if (super.hasDuplicates())
 			return true;
 		for (int iReg = 0; iReg < this.iSize; iReg++) {
 			if (hasDuplicates(getRegion(iReg)))
