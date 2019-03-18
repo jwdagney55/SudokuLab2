@@ -2,6 +2,8 @@ package pkgHelper;
 
 import java.util.Arrays;
 
+import org.apache.commons.lang.ArrayUtils;
+
 public class LatinSquare {
 
 	/**
@@ -11,6 +13,8 @@ public class LatinSquare {
 	 * @since Lab #1
 	 */
 	private int[][] LatinSquare;
+	private boolean bIgnoreZero;
+	private java.util.ArrayList<PuzzleViolation> PV;
 
 	/**
 	 * No-arg constructor, make it public, don't do anything in the constructor
@@ -282,5 +286,33 @@ public class LatinSquare {
 
 	public void setLatinSquare(int[][] latinSquare) {
 		LatinSquare = latinSquare;
+	}
+	
+	protected void AddPuzzleViolation(PuzzleViolation pv) {
+		PV.add(pv);
+	}
+	
+	protected void ClearPuzzleViolation() {
+		PV.clear();
+	}
+	
+	protected java.util.ArrayList<PuzzleViolation> getPV(){
+		return PV;
+	}
+	
+	public boolean isbIgnoreZero() {
+		return bIgnoreZero;
+	}
+	
+	protected void setbIgnoreZero(boolean ignoreZero) {
+		bIgnoreZero=ignoreZero;
+	}
+	
+	private int[] removeZeros(int[] arr) {
+		int[] copiedArray = Arrays.copyOf(arr, arr.length);
+		while(ArrayUtils.contains(copiedArray, 0)) {
+			copiedArray=ArrayUtils.removeElement(copiedArray, 0);
+		}
+		return copiedArray;
 	}
 }
