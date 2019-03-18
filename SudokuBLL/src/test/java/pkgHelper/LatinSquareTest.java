@@ -4,9 +4,23 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
 
+import pkgEnum.ePuzzleViolation;
+
 public class LatinSquareTest {
+	
+	@Test public void removeZerosTest() {
+		// Code from LatinSquare.removeZeros
+		int[] arr = {1,2,0,4,5,0,7};
+		int[] copiedArray = Arrays.copyOf(arr, arr.length);
+		while(ArrayUtils.contains(copiedArray, 0)) {
+			copiedArray=ArrayUtils.removeElement(copiedArray, 0);
+		}
+		int[] expected = {1,2,4,5,7};
+		assertTrue(Arrays.equals(expected,copiedArray));
+	}
 
 	@Test
 	public void hasDuplicates_test1() {
@@ -138,5 +152,9 @@ public class LatinSquareTest {
 	
 	@Test
 	public void ePuzzleViolationTest() {
+		ePuzzleViolation[] e=ePuzzleViolation.values();
+		ePuzzleViolation expected=e[1];
+		ePuzzleViolation actual=ePuzzleViolation.valueOf("DupCol");
+		assertEquals(expected, actual);
 	}
 }

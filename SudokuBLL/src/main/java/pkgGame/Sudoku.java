@@ -2,6 +2,8 @@ package pkgGame;
 
 import java.util.Arrays;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import pkgHelper.LatinSquare;
 
 public class Sudoku extends LatinSquare {
@@ -83,18 +85,37 @@ public class Sudoku extends LatinSquare {
 	}
 	
 	public boolean isPartialSudoku() throws Exception {
-		boolean isPartial = true;
-		if (!ContainsZero())
-			isPartial = false;
-		else if (!this.isLatinSquare())
-			isPartial = false;
-		else if (hasDuplicates())
-			isPartial = false;
-		for (int reg = 1; reg < iSize; reg++) {
-			if (!hasAllValues(getRegion(0),getRegion(reg)))
-				isPartial = false;
+		boolean iPS=true;
+		if(ContainsZero()==false) {
+			iPS=false;
+			return iPS;
 		}
-		return isPartial;
+		for(int idx=0; idx<iSize; idx++) {
+			int[] iRow=getRow(idx);
+			int[] iCol=getColumn(idx);
+			int[] iReg=getRegion(idx);
+			
+			
+			int[] iRow_n0=ArrayUtils.removeElement(Arrays.copyOf(iRow, iRow.length), 0);
+			int[] iCol_n0=ArrayUtils.removeElement(Arrays.copyOf(iCol, iCol.length), 0);
+			int[] iReg_n0=ArrayUtils.removeElement(Arrays.copyOf(iReg, iReg.length), 0);
+			
+			if(hasDuplicates(iRow_n0)==true) {
+				iPS=false;
+				break;
+			}
+			
+			if(hasDuplicates(iCol_n0)==true) {
+				iPS=false;
+				break;
+			}
+			
+			if(hasDuplicates(iReg_n0)==true) {
+				iPS=false;
+				break;
+			}
+		}
+		return iPS;
 	}
 	
 	public boolean isSudoku() throws Exception {
