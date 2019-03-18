@@ -191,7 +191,7 @@ public class LatinSquare {
 	 *            - one dimensional array to check for duplicates
 	 * @return - returns 'true' if any of the elements are duplicate
 	 */
-	public boolean hasDuplicates(int[] arr) {
+	protected boolean hasDuplicates(int[] arr) {
 
 		// TODO: Return 'true' if any element in arr is duplicate
 
@@ -206,6 +206,23 @@ public class LatinSquare {
 			}
 		}
 		return hasDuplicates;
+	}
+	
+	protected boolean hasDuplicates() throws Exception {
+
+		for (int i = 0; i < LatinSquare.length; i++) {
+			if (hasDuplicates(getRow(i))) {
+				return true;
+			}
+		}
+		for (int i = 0; i < LatinSquare.length; i++)  {
+			if (hasDuplicates(getColumn(i))) {
+				return true;
+			}
+		}
+		
+		return false;
+				
 	}
 
 	/**
